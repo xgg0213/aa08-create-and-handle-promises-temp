@@ -1,11 +1,15 @@
+// question 1: what is the impact of having the console.log in different places?
+// question 2: is the solution below correct, especially the workout one?
+
 function stretch() {
   // Your code here 
   return new Promise((resolve, reject) => {
     setTimeout (() => {
-      resolve()
+      console.log("done stretching"); 
+      resolve(); // syntax is for fullfiling the promise, can treat resolve() as return;
     }, 1000)
 
-    console.log("done stretching")
+    
   })
   
 }
@@ -14,10 +18,11 @@ function runOnTreadmill() {
   // Your code here 
   return new Promise ((resolve, reject) => {
     setTimeout(() => {
-      resolve()
+      console.log("done running on treadmill");
+      resolve();
     }, 500)
 
-    console.log("done running on treadmill")
+    
   })
 
   
@@ -27,20 +32,21 @@ function liftWeights() {
   // Your code here 
   return new Promise ((resolve, reject) => {
     setTimeout(()=> {
+      console.log("done lifting weights");
       resolve();
     }, 2000)
 
-    console.log("done lifting weights")
+    
   })
 
 }
 
 function workout() {
   // Your code here 
-  stretch().then();
-  runOnTreadmill().then();
-  liftWeights().then();
-  console.log("done working out")
+  stretch()
+    .then(runOnTreadmill) // no need to invoke the function here because the .then takes in a function by default
+    .then(liftWeights)
+    .then(() => console.log("done working out"))
 }
 
 
